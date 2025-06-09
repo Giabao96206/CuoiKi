@@ -88,3 +88,84 @@ document.addEventListener("click", (e) => {
     goiytable.style.display = "none";
   }
 });
+
+let thean = document.querySelector(
+  "#header #nav .nav2 .about-user .showmore .theshow a"
+);
+thean.addEventListener("click", function (e) {
+  e.preventDefault();
+  revealList();
+});
+function revealList() {
+  const list = document.querySelector(
+    "#header #nav .nav2 .about-user .more-option ul "
+  );
+  const items = list.querySelectorAll(
+    "#header #nav .nav2 .about-user .more-option ul li"
+  );
+
+  // Hiển thị danh sách nếu đang ẩn
+  if (list.style.display === "none" || list.style.display === "") {
+    list.style.display = "block";
+
+    // Dùng setTimeout để chờ DOM render trước khi chạy hiệu ứng
+    setTimeout(() => {
+      items.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add("hienthi");
+          if (index === items.length - 1) {
+            item.scrollIntoView({ behavior: "smooth", block: "end" });
+          }
+        }, index * 200); // delay từng dòng
+      });
+    }, 10); // Delay nhỏ để đảm bảo DOM đã vẽ lại
+  } else {
+    // Ẩn danh sách nếu đang hiển thị
+    items.forEach((item) => {
+      item.classList.remove("hienthi");
+    });
+    setTimeout(() => {
+      list.style.display = "none";
+    }, items.length * 100); // Đợi hiệu ứng hoàn thành trước khi ẩn
+  }
+}
+document
+  .querySelector("#header #nav .nav2 .about-user .btn-close")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    document.querySelector(
+      "#header #nav .nav2 .login-sucess .about-user"
+    ).style.display = "none";
+  });
+
+document
+  .querySelector("#header #nav .nav2 .login-sucess .img-1")
+  .addEventListener("click", () => {
+    let a = document.querySelector(
+      "#header #nav .nav2 .login-sucess .about-user"
+    );
+    if (a.style.display === "none" || a.style.display === "") {
+      a.style.display = "block";
+    } else {
+      a.style.display = "none";
+    }
+  });
+
+document
+  .querySelector("#header #nav .nav2 .about-user .more-option .logout")
+  .addEventListener("click", async (event) => {
+    event.preventDefault();
+    let conf = confirm("Bạn có chắc muốn đăng xuất không?");
+    if (conf) {
+      try {
+        let respone = await fetch("/logout");
+        if (respone.ok) {
+          window.location.reload();
+        } else {
+          alert("Lỗi đăng xuất. Vui lòng thử lại sau.");
+        }
+      } catch (error) {
+        console.error("Lỗi khi đăng xuất:", error);
+      }
+    }
+  });

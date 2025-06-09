@@ -109,3 +109,86 @@ document
       }
     }
   });
+
+particlesJS("particles-js", {
+  particles: {
+    number: {
+      value: 100,
+    },
+    color: {
+      value: "#ffffff",
+    },
+    shape: {
+      type: "circle",
+    },
+    opacity: {
+      value: 0.5,
+    },
+    size: {
+      value: 3,
+    },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: "#ffffff",
+      opacity: 0.4,
+      width: 1,
+    },
+    move: {
+      enable: true,
+      speed: 2,
+    },
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: {
+        enable: true,
+        mode: "repulse", // Các mode khác: "grab", "bubble"
+      },
+      onclick: {
+        enable: true,
+        mode: "push",
+      },
+    },
+    modes: {
+      repulse: {
+        distance: 100,
+      },
+    },
+  },
+  retina_detect: true,
+});
+let list_small = document.querySelectorAll(
+  ".main-content .content .container .list-film .list-small"
+);
+
+let observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      } else {
+        entry.target.classList.remove("show"); // Ẩn khi ra khỏi khung nhìn
+      }
+    });
+  },
+  {
+    threshold: 0.1,
+  }
+);
+list_small.forEach((box) => {
+  observer.observe(box);
+});
+
+document.addEventListener("mousemove", function (e) {
+  const trail = document.createElement("div");
+  trail.className = "trail";
+  document.body.appendChild(trail);
+  trail.style.left = e.clientX - 4 + "px";
+  trail.style.top = e.clientY + window.scrollY - 4 + "px";
+
+  setTimeout(() => {
+    trail.remove();
+  }, 1000);
+});

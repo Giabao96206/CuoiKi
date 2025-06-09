@@ -81,11 +81,3 @@ module.exports.index = async (req, res) => {
     res.status(500).send("Đã xảy ra lỗi khi tải dữ liệu");
   }
 };
-
-const a = async () => {
-  const data = await fetchAPI(
-    "https://phimapi.com/danh-sach/phim-moi-cap-nhat-v3?page=1"
-  );
-  console.log(data);
-  return data;
-};

@@ -75,6 +75,11 @@ video.addEventListener("mouseout", () => {
   }
 });
 document.addEventListener("keydown", (event) => {
+  // Kiểm tra xem có đang gõ văn bản trong input hoặc textarea không
+  const activeElement = document.activeElement;
+  let isTyping =
+    activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA";
+  if (isTyping) return;
   if (event.key === "K" || event.key === "k" || event.key === "Space") {
     if (video.paused) {
       video.play();
@@ -185,3 +190,78 @@ document.addEventListener("mousemove", function (e) {
     trail.remove();
   }, 1000);
 });
+
+// Hiệu ứng tập phim
+
+let tapphim = document.querySelectorAll(
+  ".main-content .content .container .episode ul li"
+);
+
+let observer4 = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("showes");
+      } else {
+        entry.target.classList.remove("showes"); // Ẩn khi ra khỏi khung nhìn
+      }
+    });
+  },
+  {
+    threshold: 0.1,
+  }
+);
+
+tapphim.forEach((box) => {
+  observer4.observe(box);
+});
+
+// Hiệu ứng about-film
+let about_film = document.querySelectorAll(
+  ".main-content .content .container .more-movie"
+);
+
+let observe5 = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("showes2");
+      } else {
+        entry.target.classList.remove("showes2");
+      }
+    });
+  },
+  {
+    threshold: 0.1,
+  }
+);
+
+about_film.forEach((box) => {
+  observe5.observe(box);
+});
+
+let sectionfilm1 = document.querySelectorAll(
+  ".main-content .content .container .section1"
+);
+sectionfilm1.forEach((box) => {
+  observe5.observe(box);
+});
+
+let fbcommnet = document.querySelectorAll(
+  ".main-content .content .container .comment-fb"
+);
+fbcommnet.forEach((box) => {
+  observe5.observe(box);
+});
+
+let film_list = document.querySelectorAll(
+  ".main-content .content .container .section1-film"
+);
+
+document
+  .querySelector(".main-content .icon-next #icon-next1")
+  .addEventListener("click", () => {
+    film_list.forEach((item) => {
+      item.scrollLeft += 300;
+    });
+  });

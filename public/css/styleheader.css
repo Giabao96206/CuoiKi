@@ -97,7 +97,7 @@
 #header #nav {
   width: 100%;
   height: 100%;
-  padding: 0 32px;
+  padding: 0 10px;
   font-size: 20px;
   display: flex;
 }
@@ -1006,4 +1006,244 @@
 
 .footer .content-footer .content-footer-right .item1 li a:hover {
   color: #ff8a00;
+}
+
+/* Phần login */
+
+#header #nav .nav2 .ti-user {
+  padding: 5px;
+  color: white;
+  margin-left: 10px;
+  border: 1px solid black;
+  transition: color 0.5s ease, border 0.5s ease;
+  border-radius: 5px;
+  position: relative;
+}
+
+#header #nav .nav2 .ti-user:hover {
+  color: #ff8a00;
+  border: 1px solid #ff8a00;
+}
+
+#header #nav .nav2 .ti-user .login {
+  /* margin-top: 18px; */
+  position: absolute;
+  right: 0;
+  background-color: #ff8a00;
+  border-radius: 5px;
+  display: none;
+  top: 100%;
+  width: 128px;
+  height: auto;
+  font-size: 13px;
+  /* display: flex; */
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+}
+
+#header #nav .nav2 .ti-user:hover .login {
+  display: flex;
+}
+
+#header #nav .nav2 .ti-user:hover .login a {
+  padding: 8px;
+  list-style-type: none;
+  text-decoration: none;
+}
+#header #nav .nav2 .ti-user:hover .login a:hover {
+  color: white;
+}
+
+/* Da dang nhap */
+
+#header #nav .nav2 .login-sucess {
+  padding: 5px;
+  color: white;
+  margin-left: 10px;
+  transition: color 0.5s ease, border 0.5s ease;
+  border-radius: 5px;
+  position: relative;
+  height: auto;
+  width: 50px;
+}
+
+#header #nav .nav2 .login-sucess .img-1 {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* #header #nav .nav2 .login-sucess:hover {
+  color: #ff8a00;
+} */
+
+#header #nav .nav2 .login-sucess .about-user {
+  overflow: auto;
+  scrollbar-width: none;
+  position: absolute;
+  top: 70px;
+  width: 436px;
+  z-index: 991;
+  right: 0px;
+  margin-right: 4px;
+  min-height: 300px;
+  max-height: 500px;
+  max-width: calc(-8px + 100vw);
+  background-color: rgb(233, 238, 246);
+  border-radius: 10px;
+  display: none;
+}
+
+#header #nav .nav2 .login-sucess .about-user .name-user {
+  text-align: center;
+  background-color: #ccc;
+  margin-bottom: 15px;
+}
+
+#header #nav .nav2 .login-sucess .about-user .name-user a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+#header #nav .nav2 .login-sucess .about-user .user-img {
+  width: 100%;
+}
+
+#header #nav .nav2 .login-sucess .about-user .user-img .img {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+#header #nav .nav2 .login-sucess .about-user .user-img .img img {
+  width: 30%;
+  border-radius: 50%;
+}
+
+#header #nav .nav2 .login-sucess .about-user .hi-name {
+  text-align: center;
+  padding: 20px;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 500;
+  word-break: break-word;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+}
+
+#header #nav .nav2 .about-user .edit {
+  display: block;
+  margin: 0 auto;
+  border: none;
+  padding: 10px 50px;
+  border-radius: 15px;
+  border: 1px solid black;
+  transition: background-color 0.5s ease;
+}
+#header #nav .nav2 .about-user .edit:hover {
+  background-color: #ccc;
+}
+
+#header #nav .nav2 .about-user .showmore {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 10px;
+}
+
+#header #nav .nav2 .about-user .showmore .theshow {
+  display: flex;
+  justify-content: center;
+}
+
+#header #nav .nav2 .about-user .showmore .theshow a {
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 50px;
+  font-size: 15px;
+  list-style-type: none;
+  text-decoration: none;
+  transition: background-color 0.5s ease;
+}
+
+#header #nav .nav2 .about-user .showmore .theshow:hover a {
+  background-color: #ccc;
+}
+#header #nav .nav2 .about-user .more-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  padding: 10px;
+}
+#header #nav .nav2 .about-user .more-option ul {
+  display: none;
+}
+
+#header #nav .nav2 .about-user .more-option li:nth-child(1) {
+  border-radius: 0;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+#header #nav .nav2 .about-user .more-option li:nth-child(4) {
+  border-radius: 0;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+#header #nav .nav2 .about-user .more-option li {
+  list-style-type: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  color: black;
+  background-color: rgb(233, 238, 246);
+  padding: 11px;
+  border: 1px solid;
+  text-decoration: none;
+  margin: 2px 0;
+  transition: background-color 0.5s ease;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#header #nav .nav2 .about-user .more-option li.hienthi {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#header #nav .nav2 .about-user .more-option li a {
+  text-decoration: none;
+  color: black;
+}
+
+#header #nav .nav2 .about-user .more-option li:hover {
+  background-color: #ccc;
+}
+
+#header #nav .nav2 .about-user .btn-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: black;
+  z-index: 1000;
+  padding: 10px;
+  transition: background-color 0.5s ease;
+  /* border: 1px solid; */
+}
+
+#header #nav .nav2 .about-user .btn-close:hover {
+  background-color: rgb(225, 228, 234);
 }

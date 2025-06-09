@@ -121,6 +121,7 @@ module.exports.gener = async (req, res) => {
     res.render("client/pages/search/search", {
       film, // vì film là mảng, lấy phần tử đầu tiên
       name,
+      user: req.session.user,
     });
   } catch (err) {
     console.log(err);
@@ -146,6 +147,7 @@ module.exports.country = async (req, res) => {
       name = "TỔNG HỢP";
       res.render("client/pages/search/search", {
         film, // vì film là mảng, lấy phần tử đầu tiên
+        user: req.session.user,
       });
       return;
     }
@@ -160,6 +162,7 @@ module.exports.country = async (req, res) => {
     res.render("client/pages/search/search", {
       film, // vì film là mảng, lấy phần tử đầu tiên
       name,
+      user: req.session.user,
     });
   } catch (err) {
     console.log(err);
@@ -182,6 +185,7 @@ module.exports.year = async (req, res) => {
       res.render("client/pages/search/search", {
         film, // vì film là mảng, lấy phần tử đầu tiên
         name,
+        user: req.session.user,
       });
       return;
     }
@@ -196,6 +200,7 @@ module.exports.year = async (req, res) => {
     res.render("client/pages/search/search", {
       film, // vì film là mảng, lấy phần tử đầu tiên
       name,
+      user: req.session.user,
     });
   } catch (err) {
     console.log(err);
@@ -217,6 +222,7 @@ module.exports.phim = async (req, res) => {
     res.render("client/pages/search/search", {
       film, // vì film là mảng, lấy phần tử đầu tiên
       name,
+      user: req.session.user,
     });
   } catch (err) {
     console.log(err);
@@ -233,22 +239,12 @@ module.exports.timkiem = async (req, res) => {
     let slugs = film1.map((item) => item.slug);
     film2 = film2.filter((item) => !slugs.includes(item.slug));
     let film = [...film1, ...film2];
-    res.render("client/pages/search/search", {
+    res.render("client/pages/search/search2", {
       film, // vì film là mảng, lấy phần tử đầu tiên
       name,
+      user: req.session.user,
     });
   } catch (err) {
     console.log(err);
   }
 };
-
-let f = async () => {
-  let a = "dao-hai-tac";
-  let name = a.split("-").join(" ");
-  let b = await timPhimFuzzy(name);
-  // console.log(a.episodes[0].server_data[1].name);
-  // let a = await timPhimFuzzy2("dao hai tac");
-  console.log(b[1].poster_url);
-};
-
-// f();

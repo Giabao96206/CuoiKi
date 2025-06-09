@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    title Video Call App
+    link(rel='stylesheet', href='../../../../css/stylecall.css')
+  body
+    #userCount Người đang online: 1
+    #notice Bạn cần 2 người để bắt đầu gọi...
+
+    #videoContainer
+        video#remoteVideo(autoplay playsinline)
+        video#localVideo(autoplay muted playsinline)
+
+    //- Nút điều khiển
+    .controls
+      button#callBtn.hidden 📞
+      button#toggleMic 🔊
+      button#toggleCamera 🎥
+      button#hangUp ❌
+
+    //- Đang gọi...
+    #callingScreen.hidden
+      h2 📞 Đang gọi...
+
+    //- Nhận cuộc gọi
+    #incomingCallUI.hidden
+      h2 🚨 Có cuộc gọi đến!
+      button#acceptCall ✅ Chấp nhận
+      button#declineCall ❌ Từ chối
+
+script.
+  let users = !{JSON.stringify(user)};
+  let CURRENT_USER  = users.email
+  let TARGET_USER  = "#{email}";
+ console.log("Current User:", CURRENT_USER);
+  console.log("Email:",TARGET_USER);
+script(src="/socket.io/socket.io.js")
+script(src="../../../../js/message/video.js")
+

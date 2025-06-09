@@ -65,3 +65,116 @@ function updateStars(score) {
 }
 
 updateStars(score);
+
+particlesJS("particles-js", {
+  particles: {
+    number: {
+      value: 150,
+    },
+    color: {
+      value: "#ffffff",
+    },
+    shape: {
+      type: "circle",
+    },
+    opacity: {
+      value: 0.5,
+    },
+    size: {
+      value: 5,
+    },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: "#ffffff",
+      opacity: 0.4,
+      width: 1,
+    },
+    move: {
+      enable: true,
+      speed: 2,
+    },
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: {
+        enable: true,
+        mode: "repulse", // Các mode khác: "grab", "bubble"
+      },
+      onclick: {
+        enable: true,
+        mode: "push",
+      },
+    },
+    modes: {
+      repulse: {
+        distance: 100,
+      },
+    },
+  },
+  retina_detect: true,
+});
+
+document.addEventListener("mousemove", function (e) {
+  const trail = document.createElement("div");
+  trail.className = "trail";
+  document.body.appendChild(trail);
+  trail.style.left = e.clientX - 4 + "px";
+  trail.style.top = e.clientY + window.scrollY - 4 + "px";
+
+  setTimeout(() => {
+    trail.remove();
+  }, 1000);
+});
+
+// Hiệu ứng about-film
+let about_film = document.querySelectorAll(
+  ".main-content .content .container .more-movie"
+);
+
+let observe5 = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("showes2");
+      } else {
+        entry.target.classList.remove("showes2");
+      }
+    });
+  },
+  {
+    threshold: 0.2,
+  }
+);
+
+about_film.forEach((box) => {
+  observe5.observe(box);
+});
+
+let sectionfilm1 = document.querySelectorAll(
+  ".main-content .content .container .section1"
+);
+sectionfilm1.forEach((box) => {
+  observe5.observe(box);
+});
+
+// fb -commnet
+let fbcommnet = document.querySelectorAll(
+  ".main-content .content .container .comment-fb"
+);
+fbcommnet.forEach((box) => {
+  observe5.observe(box);
+});
+
+let film_list = document.querySelectorAll(
+  ".main-content .content .container .section1-film"
+);
+
+document
+  .querySelector(".main-content .icon-next #icon-next1")
+  .addEventListener("click", () => {
+    film_list.forEach((item) => {
+      item.scrollLeft += 300;
+    });
+  });

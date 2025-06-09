@@ -1,0 +1,105 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Messenger UI Clone
+  link(rel='stylesheet' href='../../../../css/messege.css')
+  link(rel="stylesheet", href="../../../../Icon/themify-icons/index.html")
+  link(rel="stylesheet", href="../../../../Icon/themify-icons/themify-icons.css")
+  script(src='/socket.io/socket.io.js')
+.container
+  .user-now
+    img(src= `${user.avatar}` alt='')
+    .about-user-now
+      p #{user.name}
+      p(style='font-size: 12px') @#{user.email}
+      a( class='logout' link='#')
+        div
+          .x1i10hfl.xjbqb8w.x1ejq31n.xd10rxx.x1sy0etr.x17r0tee.x972fbf.xcfux6l.x1qhh985.xm0m39n.xe8uvvx.x1hl2dhg.xggy1nq.x1o1ewxj.x3x9cwd.x1e5q0jg.x13rtm0m.x87ps6o.x1lku1pv.x1a2a7pz.x6s0dn4.xjyslct.x9f619.x1ypdohk.x78zum5.x1q0g3np.x2lah0s.xdj266r.xat24cr.xnqzcj9.x1gh759c.x1344otq.x1de53dj.x1n2onr6.x16tdsg8.x1ja2u2z.x1y1aw1k.xwib8y2.custom-cursor-on-hover(aria-labelledby='«r2lv»' role='menuitem' tabindex='-1' style='display: flex; justify-content: center; padding: 10px')
+            .x6s0dn4.xoi2r2e.x78zum5.xl56j7k.xq8finb.x1qhmfi1.x14yjl9h.xudhj91.x18nykt9.xww2gxu.xvnh2x.x1g0q3yh(aria-hidden='true' style='margin-right: 5px')
+              svg.xfx01vb.x1lliihq.x1tzjh5l.x1k90msu.x2h7rmj.x1qfuztq(viewbox='6 6 24 24' fill='currentColor' width='16' height='16' overflow='visible' style='--color: var(--primary-icon)')
+                path(d='M21.498 14.75a1 1 0 0 0 1-1V12a4 4 0 0 0-4-4h-6.5a4 4 0 0 0-4 4v12a4 4 0 0 0 4 4h6.5a4 4 0 0 0 4-4v-1.75a1 1 0 0 0-1-1h-.5a1 1 0 0 0-1 1V24a1.5 1.5 0 0 1-1.5 1.5h-6.5a1.5 1.5 0 0 1-1.5-1.5V12a1.5 1.5 0 0 1 1.5-1.5h6.5a1.5 1.5 0 0 1 1.5 1.5v1.75a1 1 0 0 0 1 1h.5z')
+                path(d='M14.498 16.75h9.752a.25.25 0 0 0 .25-.25v-1.858a1 1 0 0 1 1.643-.766l4.002 3.356a1 1 0 0 1 0 1.532l-4.002 3.357a1 1 0 0 1-1.643-.767V19.5a.25.25 0 0 0-.25-.25h-9.752a1 1 0 0 1-1-1v-.5a1 1 0 0 1 1-1z')
+            .x6s0dn4.x78zum5.x1q0g3np.x1iyjqo2.x1qughib.xeuugli
+              .x1qjc9v5.x9f619.xdl72j9.x2lwn1j.xeuugli.x1n2onr6.x1ja2u2z.x78zum5.xdt5ytf.xs83m0k.xz62fqu.x16ldp7u
+                .x1qjc9v5.x9f619.x78zum5.xdl72j9.xdt5ytf.x2lah0s.x2lwn1j.xeuugli.x1n2onr6.x1ja2u2z.xu06os2.x1ok221b
+                  span.x1lliihq.x1plvlek.xryxfnj.x1n2onr6.x1ji0vk5.x18bv5gf.x193iq5w.xeuugli.x13faqbe.x1vvkbs.x1s928wv.xhkezso.x1gmr53x.x1cpjm7i.x1fgarty.x1943h6x.x1xmvt09.x1f6kntn.xk50ysn.xw2npq5.x1yc453h.xudqn12.x3x7a5m.xq9mrsl(dir='auto' id='«r2lv»' style='\
+                  ----base-line-clamp-line-height: 20px;\
+                  --lineHeight: 20px;\
+                  ') &Dstrok;&abreve;ng xu&#x1EA5;t
+            .x1ey2m1c.xds687c.x17qophe.xg01cxk.x47corl.x10l6tqk.x13vifvy.x1ebt8du.x19991ni.x1dhq9h.x1o1ewxj.x3x9cwd.x1e5q0jg.x13rtm0m(role='none' data-visualcompletion='ignore' style='border-radius: 6px; inset: 0px')
+  // Sidebar
+  .sidebar
+    .header &Dstrok;o&#x1EA1;n chat
+    .search
+      input(type='text' placeholder='Tìm kiếm trên Messenger...')
+    #chat-list.shimmer.shimmer-full
+      .user-chat
+        img(src= `${receiver.url_image}` alt='')
+        p.user-name #{receiver.username}
+  // Chat content
+  .chat-area
+    .room-chat
+      img(src=`${receiver.url_image}` alt='')
+      .name-room Chat với #{receiver.username}
+      .icon-call 
+        a( href=`/callmess/${receiver.email}` target="_blank")
+          i.ti-video-camera
+    .chat-area
+      #chat-content.shimmer.shimmer-full
+        //- .message.right B&#x1EA1;n: Ch&agrave;o b&#x1EA1;n!
+        //- .img-right
+        //-   img(src='./Component/image/background1.jpg' alt='')
+        //- .message.left Th&#x1EA3;o Ly: M&#x1EB9; d&ugrave;ng nick Gia B&#x1EA3;o &aacute;
+        //- .img-left
+        //-   img(src='./Component/image/background1.jpg' alt='')
+        //- .message.left Th&#x1EA3;o Ly: M&#x1EB9; d&ugrave;ng nick Gia B&#x1EA3;o &aacute;
+        //- .message.right B&#x1EA1;n: Ch&agrave;o b&#x1EA1;n!
+        //- .img-right
+        //-   img(src='./Component/image/background1.jpg' alt='')
+        //- .message.left Th&#x1EA3;o Ly: M&#x1EB9; d&ugrave;ng nick Gia B&#x1EA3;o &aacute;
+        //- .message.right B&#x1EA1;n: Ch&agrave;o b&#x1EA1;n!
+        //- .message.left Th&#x1EA3;o Ly: M&#x1EB9; d&ugrave;ng nick Gia B&#x1EA3;o &aacute;
+        //- .message.right B&#x1EA1;n: Ch&agrave;o b&#x1EA1;n!
+        //- .message.left Th&#x1EA3;o Ly: M&#x1EB9; d&ugrave;ng nick Gia B&#x1EA3;o &aacute;
+        //- .message.right B&#x1EA1;n: Ch&agrave;o b&#x1EA1;n!
+        //- .message.left Th&#x1EA3;o Ly: M&#x1EB9; d&ugrave;ng nick Gia B&#x1EA3;o &aacute;
+        //- .message.right B&#x1EA1;n: Ch&agrave;o b&#x1EA1;n!
+        //- .message.left Th&#x1EA3;o Ly: M&#x1EB9; d&ugrave;ng nick Gia B&#x1EA3;o &aacute;
+        //- .message.right B&#x1EA1;n: Ch&agrave;o b&#x1EA1;n!
+        //- .message.left Th&#x1EA3;o Ly: M&#x1EB9; d&ugrave;ng nick Gia B&#x1EA3;o &aacute;
+      .input-area
+        .preview
+          .img-privew
+            i.ti-close
+        input#file.img-input(type='file' accept='image/*' style='display: none' multiple='')
+        label.img-file(for='file')
+          img(src='../../../../imgage/Cloud-Icon.png')
+        input#msgInput(type='text' placeholder='Aa')
+        button(onclick='sendMessage()') G&#x1EED;i
+  // Info panel
+  .info-panel
+    #info-content.shimmer.shimmer-full
+      div(style='text-align: center')
+        .img-user
+          img(src=`${receiver.url_image}` alt='')
+        .info-name(style='margin-bottom: 10px') #{receiver.username}
+        .info-email(style='font-size: 14px') #{receiver.email}
+      .trangcanhan
+        .icon-fb
+          a(href=`/profile/${receiver.email}` target="_blank")
+          i.ti-facebook
+        .name-fb
+          p Trang c&aacute; nh&acirc;n
+#hover-tooltip.tooltip
+
+
+
+script. 
+ let users = !{JSON.stringify(user)}; 
+ let receivers = !{JSON.stringify(receiver)};
+
+
+ console.log(receivers);
+script(src='../../../../js/message/message.js')
+script(src='../../../../js/message/sendmessage.js')

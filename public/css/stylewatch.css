@@ -113,6 +113,7 @@ html {
 .main-content .content .container .movie {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .main-content .content .container .movie .nothing {
@@ -275,8 +276,16 @@ html {
   width: 100%;
   margin-bottom: 20px;
   background-color: rgb(37, 37, 37);
+
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 1s ease, transform 0.3s ease;
 }
 
+.main-content .content .container .showes2 {
+  opacity: 1;
+  transform: translateY(0);
+}
 .main-content .content .container .more-movie .social {
   margin: 10px 0;
   border-bottom: 1px solid #ccc;
@@ -369,14 +378,26 @@ html {
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
   margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: opacity 1s ease, transform 0.3s ease;
 }
-
-/* Phần section 1 */
-
+.main-content .content .container .showes2 {
+  opacity: 1;
+  transform: translateY(0);
+}
 .main-content .content .container .section1 {
   width: 100%;
-  height: 300px;
-  position: relative;
+  height: auto;
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: opacity 1s ease, transform 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.main-content .content .container .showes2 {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .main-content .content .container .section1-heading h2 {
@@ -404,6 +425,7 @@ html {
 }
 .main-content .content .container .section1-film-container {
   height: 100%;
+  width: 160px;
   flex: 0 0 auto;
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0.3;
@@ -413,13 +435,13 @@ html {
 
 .main-content .content .container .section1-film-container .film-container {
   width: 100%;
-  height: 180px;
+  height: 225px;
   position: relative;
   overflow: hidden;
 }
 .main-content .content .container .section1-film-container .film-container img {
   object-fit: fill;
-  width: 120px;
+  width: 100%;
   height: 100%;
   transition: transform 0.3s ease-in-out;
 }
@@ -621,4 +643,311 @@ html {
   width: 100%;
   height: 100%;
   z-index: 3; /* Hiệu ứng sẽ nằm trên các lớp có z-index < 3 */
+}
+
+.trail {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #9d4edd, #00b4d8); /* vệt sáng phối màu */
+  pointer-events: none;
+  box-shadow: 0 0 8px #f4d35e, 0 0 15px #9d4edd,
+    0 0 30px rgba(255, 255, 255, 0.3);
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+
+/* Phần new của các phim đầu */
+.main-content
+  .content
+  .container
+  .section1-film-container
+  .film-container
+  .overflow_film {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  transform: translateY(100%);
+  transition: transform 0.5s ease-in-out;
+  transition-delay: 0.2s;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.8)
+  );
+  z-index: 1;
+}
+
+.main-content
+  .content
+  .container
+  .section1-film-container
+  .film-container:hover
+  .overflow_film {
+  transform: translateY(0);
+}
+
+.main-content
+  .content
+  .container
+  .section1-film-container
+  .film-container
+  .overflow_film
+  .name {
+  width: 100%;
+  padding-top: 50%;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+  font-size: 12px;
+  margin: 0 0 0.5rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+.main-content
+  .content
+  .container
+  .section1-film-container
+  .film-container
+  .overflow_film
+  .name
+  span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  margin-top: 5px;
+}
+
+.main-content
+  .content
+  .container
+  .section1-film-container
+  .film-container
+  .overflow_film
+  .infofilm {
+  color: hsla(0, 0%, 100%, 0.85);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  width: 100%;
+  height: 30%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.main-content
+  .content
+  .container
+  .section1-film-container
+  .film-container
+  .overflow_film
+  .infofilm
+  p {
+  word-break: break-word;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-height: 15px;
+}
+
+/* Phần bình luận */
+.main-content .content .container .comment-fb .comment-container {
+  width: 100%;
+  margin: 50px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+}
+.main-content .content .container .comment-fb h2 {
+  color: #111827;
+  margin-bottom: 20px;
+}
+.main-content .content .container .comment-fb ul.comment-list {
+  list-style: none;
+  margin-bottom: 30px;
+  padding-left: 0;
+  max-height: 500px;
+  overflow: auto;
+}
+.main-content .content .container .comment-fb li.comment-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.main-content .content .container .comment-fb li.comment-item img.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.main-content .content .container .comment-fb .comment-content {
+  background: #f9fafb;
+  padding: 12px 16px;
+  border-radius: 12px;
+  max-width: 100%;
+  word-wrap: break-word;
+  position: relative;
+}
+.main-content .content .container .comment-fb .comment-content p {
+  margin: 0;
+  color: #111827;
+}
+.main-content .content .container .comment-fb .comment-content .comment-images {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.main-content
+  .content
+  .container
+  .comment-fb
+  .comment-content
+  img.comment-image {
+  max-height: 80px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.main-content .content .container .comment-fb .comment-content strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #1f2937;
+}
+.main-content .content .container .comment-fb .comment-time {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 6px;
+}
+.main-content .content .container .comment-fb .delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: #ef4444;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.main-content .content .container .comment-fb form.comment-form {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.main-content .content .container .comment-fb form.comment-form .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.main-content .content .container .comment-fb .input-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.main-content .content .container .comment-fb.input-area input,
+.main-content .content .container .comment-fb .input-area textarea {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  resize: none;
+}
+.main-content .content .container .comment-fb .input-area input:focus,
+.main-content .content .container .comment-fb .input-area textarea:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+.main-content .content .container .comment-fb .input-area button {
+  align-self: flex-end;
+  padding: 10px 20px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.main-content .content .container .comment-fb .input-area button:hover {
+  background: #2563eb;
+}
+.main-content .content .container .comment-fb .icon-bar {
+  display: flex;
+  gap: 10px;
+  color: #6b7280;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1.4rem;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+.main-content .content .container .comment-fb.icon-bar span:hover {
+  color: #2563eb;
+}
+.main-content .content .container .comment-fb #image-input {
+  display: block;
+}
+.main-content .content .container .comment-fb .preview-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.main-content .content .container .comment-fb .preview-images img {
+  max-height: 80px;
+  border-radius: 8px;
+}
+.main-content .content .container .comment-fb.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.main-content .content .container .comment-fb .modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+}
+.main-content
+  .content
+  .container
+  .comment-fb
+  .comment-container
+  .comment-form
+  .input-area
+  h4 {
+  margin: 0;
+  margin-top: 5px;
+}
+.main-content .content .container .comment-fb ul.comment-list .avatar {
+  border-radius: 50%;
+}
+
+.main-content .content .container .comment-fb .comment-container h2 {
+  text-align: center;
 }

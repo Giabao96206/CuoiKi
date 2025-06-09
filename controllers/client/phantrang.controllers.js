@@ -89,6 +89,7 @@ module.exports.gener = async (req, res) => {
       film, // vì film là mảng, lấy phần tử đầu tiên
       name,
       leng,
+      user: req.session.user,
     });
   } catch (err) {
     console.log(err);
@@ -128,6 +129,7 @@ module.exports.country = async (req, res) => {
         film, // vì film là mảng, lấy phần tử đầu tiên,
         name,
         leng,
+        user: req.session.user,
       });
       return;
     }
@@ -151,6 +153,7 @@ module.exports.country = async (req, res) => {
       film, // vì film là mảng, lấy phần tử đầu tiên
       name,
       leng,
+      user: req.session.user,
     });
   } catch (err) {
     console.log(err);
@@ -187,6 +190,7 @@ module.exports.year = async (req, res) => {
         film,
         name,
         leng,
+        user: req.session.user,
       });
       return;
     }
@@ -210,6 +214,7 @@ module.exports.year = async (req, res) => {
       film,
       name,
       leng,
+      user: req.session.user,
     });
   } catch (err) {
     console.log(err);
@@ -238,6 +243,7 @@ module.exports.phim = async (req, res) => {
       film,
       name,
       leng,
+      user: req.session.user,
     });
   } catch (err) {
     console.log(err);

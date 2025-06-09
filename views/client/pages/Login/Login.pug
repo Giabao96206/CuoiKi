@@ -1,0 +1,125 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Login
+  link(rel='shortcut icon' href='../style/Ảnh/Gemini_Generated_Image_dnayqbdnayqbdnay.jpg' type='image/x-icon')
+  link(rel='stylesheet' href='../../../../css/login.css')
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com')
+  link(href='https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Playwrite+ES+Deco+Guides&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap' rel='stylesheet')
+  link(rel='stylesheet' href="../../../../Icon/themify-icons/themify-icons.css")
+#alertne
+  .box-alert
+    p#success B&#x1EA1;n &dstrok;&atilde; &dstrok;&abreve;ng k&iacute; th&agrave;nh c&ocirc;ng
+    br
+    p#close OK
+  .clear
+#header
+  h1.first LOGIN TO START
+#main
+  #login-first.login
+    p Wellcome Back
+    form(action='#' method='post')
+      .login-user
+        .form-sub
+          input(type='email' placeholder='Email')
+          .icon-login
+            i.ti-email
+        .form-pass
+          input(type='password' placeholder='password')
+          .icon-login
+            i.ti-lock
+        .form-span
+          a.a1(href='/signup') New User?
+          a#forgotpass.a2(href='#') Forgot Password?
+        .clear
+        .form-button
+          button(type='submit' value='Login') Login
+      #dis.forgot
+        .form-sub
+          input#input-email-forgot(type='email' placeholder='Input your email')
+          .icon-login
+            i.ti-email
+        .form-pass
+          input(type='text' placeholder='Input your name')
+          .icon-login
+            i.ti-lock
+        #form-reset.form-sub
+          input(type='password' placeholder='New Password')
+          .icon-login
+            i.ti-lock
+        .form-span
+          a.a1(href='/signup') New User?
+          a#a22.a2(href='#') Sign In
+        .clear
+        .form-button
+          button#button-sendcode.button-forgot(type='submit' value='Login')
+            | Send Code
+          button#dis.button-forgot(type='submit' value='Login')
+            | Reset
+        .clear
+    #form-veryfi
+      form.form
+        span#span-clos.close
+        .info
+          span.title Enter your code
+          p.description
+            | Please enter the code we have sent your Gmail.
+        .input-fields
+          input#input-1(maxlength='1' type='tel' placeholder='' required='')
+          input#input-2(maxlength='1' type='tel' placeholder='' required='')
+          input#input-3(maxlength='1' type='tel' placeholder='' required='')
+          input#input-4(maxlength='1' type='tel' placeholder='' required='')
+        .action-btns
+          a.verify(href='#') Verify
+        p(style='margin-top: 21px')
+          | G&#x1EED;i l&#x1EA1;i m&atilde;: 
+          span#send-code
+          span#send-code-next
+            a(href='#') Click here
+script(type='module' src='../../../../js/Login/forgotpass.login.js')
+script.
+  let alertne = document.getElementById("alertne");
+  let text = document.querySelector("#alertne .box-alert #success");
+  const host = window.location.hostname;
+  const APICODE = async () => {
+  let email = document.getElementById("input-email-forgot").value;
+  try {
+  let response = await fetch(`/checkCode`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email }),
+  });
+  let data = await response.json();
+  if (response.ok) {
+  console.log("Phản hồi từ API:", data);
+  let mailRespone = await fetch(`/sendMail`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email }),
+  });
+  let mailData = await mailRespone.json();
+  if (mailRespone.ok) {
+  text.innerHTML = "Mã xác nhận đã được gửi đến email của bạn";
+  alertne.style.display = "block";
+  setTimeout(() => {
+  alertne.style.display = "none";
+  }, 2000);
+  } else {
+  text.innerHTML = "Lỗi gửi mã xác nhận đến email của bạn";
+  alertne.style.display = "block";
+  setTimeout(() => {
+  alertne.style.animation = "hide 0.4s linear forwards";
+  }, 2000);
+  }
+  } else {
+  console.log(
+  "Lỗi gửi mã xác nhận vì tài khoản Gmail của bạn k đúng"
+  );
+  }
+  } catch (err) {
+  console.error("Lỗi kết nối API:", err);
+  }
+  };
+script(type='module' src='../../../../js/Login/login.js')

@@ -142,9 +142,39 @@ link(rel='stylesheet' href='./Component/Icon/themify-icons/themify-icons.css')
         input(placeholder='Tìm kiếm tên diễn viên phim' type='text' name='keyword'  id='')
         ul.goiy
           img(src="../../../../imgage/Bean Eater@1x-1.0s-200px-200px.svg", alt="" id="#loader" class="loader" )
-
-          
-
+      if !user
+        .ti-user
+          .login
+            a(href='/login') &Dstrok;&abreve;ng nh&#x1EAD;p
+            a(href='/signup')  &Dstrok;&abreve;ng k&yacute;
+      else
+        .login-sucess
+          img.img-1(src= `${user.avatar}` alt='')
+          .about-user
+            .btn-close
+              i.ti-close
+            .name-user
+              a.email(href='#') #{user.email}
+            .user-img
+              .img
+                img(src= `${user.avatar}` alt='')
+            p.hi-name Hi #{user.name}
+            button(onclick=`window.location.href = "/profile/${user.email}"`).edit Edit Your Profile
+            .showmore
+              .theshow
+                a(href='#')
+                  | Show more option
+                  i.ti-angle-down
+              .more-option
+                ul
+                  li
+                    a(href='#') T&#x1EE7; phim
+                  li
+                    a(href='#') L&#x1ECB;ch s&#x1EED; xem phim
+                  li
+                    a(href=`/message/${user.email}`) Tr&ograve; Chuy&#x1EC7;n
+                  li(class='logout')
+                    a(href='#') &Dstrok;&abreve;ng xu&#x1EA5;t
 
     .nav2.nav3(style='display: none;')
       ul.nav-list

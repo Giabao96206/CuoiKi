@@ -47,30 +47,23 @@ module.exports.index = async (req, res) => {
     // Lấy phim theo slug
     const film = await fetchAPI(`https://phimapi.com/phim/${movieId}`);
     if (film.movie === "") {
-      return res.status(500).send("Không tìm thấy phim");
+      return res.render("client/pages/Error/Nofilm", {
+        user: req.session.user,
+      });
     }
     // Lấy thêm danh sách phim bộ để render bên cạnh
-    const phimbo = await getProducts(PhimBo, { chieurap: false });
+    let math = Math.floor(Math.random() * 200) + 1;
+    const phimbo = await fetchAPI(
+      `https://phimapi.com/v1/api/danh-sach/phim-bo?page=${math}&limit=20`
+    );
 
     res.render("client/pages/watchMovie/watchList", {
       film, // vì film là mảng, lấy phần tử đầu tiên
       phimbo,
+      user: req.session.user,
     });
   } catch (err) {
     console.error("Lỗi server:", err);
     res.status(500).send("Lỗi server");
-  }
-};
-
-let a = async () => {
-  let movieId = "anh-trai-say-hi";
-  try {
-    const b = await fetchAPI(`https://phimapi.com/phim/${movieId}`);
-    console.log(b.status);
-    if (b.movie === "") {
-      console.log("Không tìm thấy phim");
-    }
-  } catch (error) {
-    console.error("Lỗi khi gọi API", error);
   }
 };

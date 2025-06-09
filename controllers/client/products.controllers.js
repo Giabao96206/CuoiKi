@@ -82,19 +82,11 @@ module.exports.index = async (req, res) => {
       FilmNew,
       years,
       phimviet,
+      user: req.session.user,
     });
   } catch (error) {
     console.error("Lỗi khi tải dữ liệu:", error);
     res.status(500).send("Đã xảy ra lỗi khi tải dữ liệu");
+    return res.render("client/pages/Error/404", {});
   }
 };
-
-const a = async () => {
-  try {
-    const data = await getProducts(PhimLe, { country: "Việt Nam" });
-    console.log(data);
-  } catch (error) {
-    console.error("Lỗi khi tải dữ liệu:", error);
-  }
-};
-// a();

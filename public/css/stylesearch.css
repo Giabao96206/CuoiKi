@@ -183,6 +183,7 @@ body {
 .main-content .content .container .block {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .main-content .content .container .block .heading {
@@ -358,9 +359,16 @@ body {
 .main-content .content .container .list-film .list-small {
   width: calc(20% - 8px);
   height: 180px;
-
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  transform: translateX(-150px);
+  transition: opacity 2s ease, transform 0.3s ease;
+}
+
+.main-content .content .container .list-film .list-small.show {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .main-content .content .container .list-film .list-small img {
@@ -556,6 +564,7 @@ body {
   opacity: 1;
   box-shadow: white 0px 0px 10px 0px;
   border-radius: 5px;
+  position: relative;
 }
 .mainhotro {
   position: fixed;
@@ -612,9 +621,23 @@ body {
 @keyframes openBox {
   0% {
     visibility: hidden;
+    right: -250px;
   }
+  /* 25% {
+    visibility: visible;
+    right: -70px;
+  }
+  50% {
+    visibility: visible;
+    right: -50px;
+  }
+  75% {
+    visibility: visible;
+    right: -25px;
+  } */
   100% {
     visibility: visible;
+    right: 0;
   }
 }
 
@@ -652,5 +675,24 @@ body {
   }
   100% {
     color: #ff8a00;
+  }
+}
+
+.trail {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #9d4edd, #00b4d8); /* vệt sáng phối màu */
+  pointer-events: none;
+  box-shadow: 0 0 8px #f4d35e, 0 0 15px #9d4edd,
+    0 0 30px rgba(255, 255, 255, 0.3);
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(2);
   }
 }

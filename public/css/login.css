@@ -1,0 +1,441 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: url(../imgage/2-hinh-nen-ban-lam-viec-may-tinh-inkythuatso-14-11-52-14.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#send-code-next {
+  display: none;
+}
+@media (max-width: 740px) {
+  #main .login {
+    width: 100%;
+  }
+}
+
+.clear {
+  content: " ";
+  display: block;
+  clear: both;
+}
+#header h1 {
+  text-align: center;
+  font-size: 45px;
+  font-weight: 300;
+  margin: 60px 0;
+  color: #fff;
+  letter-spacing: 9px;
+  text-shadow: 4px 4px 3px #000;
+  word-spacing: 4px;
+  font-weight: 500;
+  font-family: "Josefin Slab", serif;
+  animation: hello 1s linear;
+}
+#main {
+  height: 610px;
+  width: 100%;
+}
+
+.login {
+  background-color: rgba(0, 0, 0, 0.6);
+  margin: 0 auto;
+  border-radius: 10px;
+  padding: 64px 32px;
+  width: 33.3333333%;
+}
+
+.login > p {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  letter-spacing: 3px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 3px 3px 4px #000;
+}
+
+.form-sub {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+form input {
+  padding: 15px 66px 15px 15px;
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.16) !important;
+  color: white !important;
+}
+
+.form-span {
+  margin-top: 8px;
+}
+
+.form-span > .a2 {
+  float: right;
+}
+
+.form-span a {
+  text-decoration: none;
+  font-size: 15px;
+  display: inline;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+  color: #fff;
+  transition: background 1s ease-in-out;
+  background: none 1s; /* Không có màu nền ban đầu */
+}
+
+.form-span a:hover {
+  background: linear-gradient(
+    to right,
+    rgb(192, 223, 184) 0%,
+    rgb(213, 186, 186) 50%,
+    rgb(235, 224, 224) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.form-button button {
+  text-align: center;
+  border: 0;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 14px 90px;
+  background-color: rgba(0, 0, 0, 0.34);
+  border: 3px solid rgba(255, 255, 255, 0.43);
+  -webkit-box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.71);
+  -moz-box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.71);
+  box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.71);
+  outline: none;
+  cursor: pointer;
+  font-family: "Open Sans", sans-serif;
+  letter-spacing: 1px;
+}
+#main .login .form-pass {
+  position: relative;
+}
+#main .login .icon-login {
+  right: 0px;
+  bottom: 0;
+  width: 60px;
+  height: 50px;
+  position: absolute;
+}
+
+#main .login .icon-login i {
+  color: #ffffff;
+  font-size: 19px;
+  line-height: 51px;
+  background-color: #fff;
+  color: black;
+  padding: 12px 20px;
+  border-radius: 3px;
+}
+
+.form-button {
+  text-align: center;
+  margin-top: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-button button:hover {
+  background-color: #fff;
+  color: #000;
+  transform: translate(0px, -3px);
+  transition: 0.8s;
+}
+
+form input {
+  border-radius: 5px;
+}
+
+form input:hover {
+  transform: translate(0px, -2px);
+  border: 2px solid rgba(255, 255, 255, 0.43);
+}
+
+#main .login .forgot .form-pass {
+  margin-bottom: 15px;
+}
+#dis {
+  display: none;
+}
+
+#login-first {
+  animation: hello 1s linear;
+}
+#main .login .forgot .form-pass,
+#main .login .forgot .form-sub,
+#main .login .login-user .form-pass,
+#main .login .login-user .form-sub {
+  animation: hello 1s linear;
+}
+
+@keyframes hello {
+  0% {
+    transform: rotateY(-90deg);
+  }
+  50% {
+    transform: rotateY(-90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes moveX {
+  0% {
+    transform: translateY(-100%); /* Bắt đầu từ trên màn hình */
+  }
+}
+
+@keyframes moveY {
+  100% {
+    transform: translateY(-100%);
+    display: none;
+  }
+}
+
+#form-veryfi {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  background-color: rgb(0, 0, 0, 0.9);
+  animation: moveX 1s ease-in;
+  visibility: hidden;
+}
+.form {
+  --black: #000000;
+  --ch-black: #141414;
+  --eer-black: #1b1b1b;
+  --night-rider: #2e2e2e;
+  --white: #ffffff;
+  --af-white: #f3f3f3;
+  --ch-white: #e1e1e1;
+  --tomato: #fa5656;
+  font-family: Helvetica, sans-serif;
+  padding: 25px;
+  display: flex;
+  max-width: 420px;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  color: var(--af-white);
+  background-color: var(--black);
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+/*----heading and description-----*/
+
+.info {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.description {
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+/*----input-fields------*/
+
+.form .input-fields {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.form .input-fields input {
+  box-sizing: content-box !important;
+  height: 28px;
+  width: 12px;
+  outline: none;
+  text-align: center;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 1.5rem;
+  color: var(--af-white);
+  border-radius: 5px;
+  border: 2.5px solid var(--eer-black);
+  background-color: var(--eer-black);
+}
+
+.form .input-fields input:focus {
+  border: 1px solid var(--af-white);
+  box-shadow: inset 10px 10px 10px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+  transition: 0.5s;
+}
+
+/*-----verify and clear buttons-----*/
+
+.action-btns {
+  display: flex;
+  margin-top: 20px;
+  gap: 0.5rem;
+}
+
+.verify {
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--night-rider);
+  text-shadow: none;
+  background: var(--af-white);
+  box-shadow: transparent;
+  border: 1px solid var(--af-white);
+  transition: 0.3s ease;
+  user-select: none;
+}
+
+.verify:hover,
+.verify:focus {
+  color: var(--night-rider);
+  background: var(--white);
+}
+
+.clear {
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ch-white);
+  text-shadow: none;
+  background: transparent;
+  border: 1px solid var(--ch-white);
+  transition: 0.3s ease;
+  user-select: none;
+}
+
+.clear:hover,
+.clear:focus {
+  color: var(--tomato);
+  background-color: transparent;
+  border: 1px solid var(--tomato);
+}
+
+/*-----close button------*/
+
+.close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+
+  color: var(--ch-white);
+  height: 30px;
+  width: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.5s ease;
+  animation: moveY 1s ease-in;
+}
+
+/* .close:hover {
+  background-color: var(--tomato);
+  color: var(--white);
+} */
+
+#form-reset {
+  display: none;
+}
+#button-reset {
+  display: none;
+}
+
+#alertne {
+  display: none;
+  position: fixed;
+  top: -50px;
+  left: 0;
+  right: 0;
+  transform: translate(-50%, -50%);
+  animation: hide 0.4s linear forwards;
+  z-index: 999;
+}
+
+.box-alert {
+  background-color: #333333;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 30%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.box-alert #success {
+  color: #fff;
+  font-size: 20px;
+  padding: 0 18px;
+}
+
+.box-alert #close {
+  color: #fff;
+  font-size: 20px;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+.box-alert #close:hover {
+  cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  border-radius: 5px;
+}
+
+@keyframes hide {
+  0% {
+    display: block;
+    transform: translate(-50%, -200%);
+    transform: translateY(-200%);
+  }
+  100% {
+    transform: translate(-50%, 50%);
+    transform: translateY(50%);
+  }
+}
+
+@keyframes close {
+  0% {
+    transform: translate(-50%, 50%);
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translate(-50%, -200%);
+    transform: translateY(-200%);
+    display: none;
+  }
+}

@@ -5,15 +5,17 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title Document
     link(rel='stylesheet', href='../../../../css/stylesearch.css')
-    link(rel="stylesheet", href="../../../../Icon/themify-icons/themify-icons.css")
     link(rel="stylesheet", href="../../../../css/searchresponsive.css")
+    link(rel="stylesheet", href="../../../../Icon/themify-icons/themify-icons.css")
   body
 block header
   include ../../partials/header
-  include ../../partials/search2main
+  include ../../partials/searchmain
   link(rel="stylesheet", href="../../../../Icon/themify-icons/themify-icons.css")
   script(src='https://cdn.jsdelivr.net/npm/hls.js@latest')
 // Phần content
+script(src='https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js')
+#particles-js(style='position:fixed;width:100%;height:100%;z-index:0;')
 .main-content
   .mainhotro 
   .content
@@ -22,13 +24,98 @@ block header
 
 block footer 
   include ../../partials/footer
-script.
-  let part = window.location.pathname.split("/");
-  let num = parseInt(part[3].split("-")[1]);
-  let leng = !{JSON.stringify(leng)}
-  console.log(leng);
+//- script.
+//-   let part = window.location.pathname.split("/");
+//-   let num = parseInt(part[3].split("-")[1]);
+//-   let leng = !{JSON.stringify(leng)}
+//-   console.log(num);
+  
 
-script(src="../../../../js/phantrang.api.js") 
-script(src="../../../../js/phantrang.js") 
+script. 
+  let list_small2 = document.querySelectorAll(
+    ".main-content .content .container .list-film .list-small"
+  );
 
-    
+  list_small2.forEach((item) => {
+    console.log(item);
+  });
+
+  let observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        } else {
+          entry.target.classList.remove("show"); // Ẩn khi ra khỏi khung nhìn
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    }
+  );
+  list_small2.forEach((box) => {
+    observer.observe(box);
+  });
+  particlesJS("particles-js", {
+    particles: {
+      number: {
+        value: 80,
+      },
+      color: {
+        value: "#ffffff",
+      },
+      shape: {
+        type: "circle",
+      },
+      opacity: {
+        value: 0.5,
+      },
+      size: {
+        value: 3,
+      },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: "#ffffff",
+        opacity: 0.4,
+        width: 1,
+      },
+      move: {
+        enable: true,
+        speed: 2,
+      },
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: {
+          enable: true,
+          mode: "repulse", // Các mode khác: "grab", "bubble"
+        },
+        onclick: {
+          enable: true,
+          mode: "push",
+        },
+      },
+      modes: {
+        repulse: {
+          distance: 100,
+        },
+      },
+    },
+    retina_detect: true,
+  });
+
+script. 
+  document.addEventListener("mousemove", function (e) {
+    const trail = document.createElement("div");
+    trail.className = "trail";
+    document.body.appendChild(trail);
+    trail.style.left = e.clientX - 4 + "px";
+    trail.style.top = e.clientY + window.scrollY - 4 + "px";
+
+    setTimeout(() => {
+      trail.remove();
+    }, 1000);
+  });

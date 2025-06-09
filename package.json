@@ -5,15 +5,15 @@
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "1.js",
+  "main": "main.js",
   "scripts": {
     "start": "nodemon --inspect 2.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "anigo-anime-api": "^1.0.3",
     "axios": "^1.8.4",
     "dotenv": "^16.4.7",
+    "express-session": "^1.18.1",
     "fuse.js": "^7.1.0",
     "mongodb": "^6.15.0",
     "mongoose": "^8.12.1",

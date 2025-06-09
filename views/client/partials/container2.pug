@@ -13,6 +13,13 @@ mixin Showmovie(a)
                 img(src= item.poster_url  , alt='')
                 span.title #{item.episode_current}
                 span.film-name #{item.name}
+                .overflow_film
+                  .name
+                    h4 #{item.name}
+                    span #{item.origin_name}
+                    span Thời lượng: #{item.time}
+                    span Năm: #{item.year}
+                    span Quốc gia: #{item.country[0].name}
                 .icon-pause
                   span.ti-control-play
 
@@ -40,24 +47,17 @@ mixin showmovie2(a)
               img(src= `https://phimimg.com/${a[randomIndex].poster_url}` , alt='')
               span.title #{a[randomIndex].episode_current}
               span.film-name #{a[randomIndex].name}
+              .overflow_film
+                .name
+                  h4 #{a[randomIndex].name}
+                  span #{a[randomIndex].origin_name}
+                  span Thời lượng: #{a[randomIndex].time}
+                  span Năm: #{a[randomIndex].year}
+                  span Quốc gia: #{a[randomIndex].country[0].name}
+                  span Thể loại: #{a[randomIndex].category[0].name}
+
               .icon-pause
                 span.ti-control-play
 
 
-
-        //- .section1
-        //-     .section1-heading
-        //-       h2 Phim &dstrok;&#x1EC1; c&#x1EED;
-        //-     .section1-film
-        //-       .icon-next
-        //-         span#icon-next1.ti-control-play
-        //-       if products
-        //-         each item in products
-        //-           .section1-film-container
-        //-             .film-container
-        //-               a.link-film(href='#')
-        //-               img(src= item.poster_url , alt='')
-        //-               span.title #{item.episode_current}
-        //-               span.film-name #{item.name}
-        //-               .icon-pause
-        //-                 span.ti-control-play
+ 
