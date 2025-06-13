@@ -7,6 +7,10 @@ head
   link(rel="stylesheet", href="../../../../Icon/themify-icons/index.html")
   link(rel="stylesheet", href="../../../../Icon/themify-icons/themify-icons.css")
   script(src='/socket.io/socket.io.js')
+  script(type='module' src='https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js')
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css")
+
+
 .container
   .user-now
     img(src= `${user.avatar}` alt='')
@@ -35,18 +39,24 @@ head
       input(type='text' placeholder='Tìm kiếm trên Messenger...')
     #chat-list.shimmer.shimmer-full
       .user-chat
-        img(src= `${receiver.url_image}` alt='')
-        p.user-name #{receiver.username}
+        //- img(src= `${receiver.url_image}` alt='')
+        //- p.user-name #{receiver.username}
   // Chat content
   .chat-area
     .room-chat
-      img(src=`${receiver.url_image}` alt='')
-      .name-room Chat với #{receiver.username}
+      img(src='' alt='')
+      .name-room 
       .icon-call 
         a( href=`/callmess/${receiver.email}` target="_blank")
           i.ti-video-camera
     .chat-area
       #chat-content.shimmer.shimmer-full
+      #typingWrapper
+
+        #typingIndicator.typing-indicator
+          span
+          span
+          span
         //- .message.right B&#x1EA1;n: Ch&agrave;o b&#x1EA1;n!
         //- .img-right
         //-   img(src='./Component/image/background1.jpg' alt='')
@@ -75,7 +85,11 @@ head
         input#file.img-input(type='file' accept='image/*' style='display: none' multiple='')
         label.img-file(for='file')
           img(src='../../../../imgage/Cloud-Icon.png')
-        input#msgInput(type='text' placeholder='Aa')
+        textarea#msgInput(type='text' placeholder='Nhập tin nhắn...' )
+        span.button-icon(style="padding: 8px; display: flex; justify-content: center; align-items: center;")
+          i.fa-solid.fa-face-smile
+        div(class="tooltip" role="tooltip")
+           emoji-picker
         button(onclick='sendMessage()') G&#x1EED;i
   // Info panel
   .info-panel
@@ -91,7 +105,7 @@ head
           i.ti-facebook
         .name-fb
           p Trang c&aacute; nh&acirc;n
-#hover-tooltip.tooltip
+//- #hover-tooltip.tooltip
 
 
 
@@ -101,5 +115,5 @@ script.
 
 
  console.log(receivers);
-script(src='../../../../js/message/message.js')
-script(src='../../../../js/message/sendmessage.js')
+script( src='../../../../js/message/message.js')
+script(type='module' src='../../../../js/message/sendmessage.js')

@@ -13,6 +13,7 @@ const callingScreen = document.getElementById("callingScreen");
 const userCountEl = document.getElementById("userCount");
 const noticeEl = document.getElementById("notice");
 let callTimeout = null;
+let incomingCall = false;
 
 let localStream;
 let peerConnection;
@@ -130,6 +131,7 @@ const createPeerConnection = async (isCaller) => {
 socket.on("user-count", (count) => updateUserCount(count));
 
 socket.on("offer", async (offer) => {
+  incomingCall = true;
   showIncomingCall();
 
   btnAccept.onclick = async () => {
@@ -140,12 +142,14 @@ socket.on("offer", async (offer) => {
     const answer = await peerConnection.createAnswer();
     await peerConnection.setLocalDescription(answer);
     socket.emit("answer", answer);
+    callingScreen.style.display = "none";
   };
 
   btnDecline.onclick = () => {
     hideIncomingCall();
     clearTimeout(callTimeout); // ✅ Đề phòng
     socket.emit("decline");
+    endCall();
   };
 });
 
@@ -192,6 +196,7 @@ btnCall.onclick = async () => {
   }, 60000);
 };
 btnHangUp.onclick = () => {
+  socket.emit("decline");
   endCall();
 };
 
@@ -215,7 +220,10 @@ getMedia();
 socket.on("connect", () => {
   if (socket.connected) {
     setTimeout(() => {
-      btnCall.click();
+      if (!incomingCall) {
+        // ✅ không tự gọi nếu đang có người gọi đến
+        btnCall.click();
+      }
     }, 1000);
   }
 });

@@ -123,15 +123,17 @@ body {
 }
 .input-area {
   display: flex;
-  padding-top: 10px;
   position: relative;
+  align-items: end;
 }
 
 .input-area .img-file {
   width: 35px;
-  height: 100%;
+  height: auto;
   color: white;
   margin-right: 5px;
+  display: flex;
+  align-items: end;
 }
 
 .input-area .img-file:hover {
@@ -141,7 +143,7 @@ body {
 
 .input-area .img-file img {
   width: 100%;
-  height: 100%;
+  height: 50px;
   padding: 5px;
 }
 .input-area .preview {
@@ -185,10 +187,15 @@ body {
   border: none;
   border-radius: 20px;
   color: white;
+  max-height: 100px;
+  overflow-y: auto;
+  height: 40px;
+  resize: none;
+  scrollbar-width: thin;
 }
 
 .input-area button {
-  margin-left: 10px;
+  /* margin-left: 10px; */
   padding: 10px 20px;
   background: #0084ff;
   border: none;
@@ -285,22 +292,43 @@ body {
 
 .message {
   max-width: 70%;
-  padding: 10px 15px;
-  border-radius: 20px;
-  background-color: #3a3b3c;
   color: white;
   display: inline-block;
   margin-bottom: 10px;
+  display: flex;
 }
 
+.message span {
+  padding: 10px 15px;
+  border-radius: 20px;
+  background-color: #3a3b3c;
+  display: inline-block;
+}
+
+.message span.right {
+  background-color: #0084ff;
+}
+
+.message .img-profile {
+  width: 40px;
+  height: 100%;
+  display: flex;
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.message .img-profile img {
+  width: 100%;
+  max-height: 35px;
+  border-radius: 50%;
+}
 .message.left {
   align-self: flex-start;
-  background-color: #3a3b3c;
 }
 
 .message.right {
   align-self: flex-end;
-  background-color: #0084ff;
 }
 
 #chat-content {
@@ -423,7 +451,64 @@ body {
   padding: 8px;
   font-size: 14px;
   z-index: 999;
-  display: none;
+  /* display: none; */
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+}
+
+/* icon */
+.tooltip {
+  visibility: hidden;
+}
+
+.tooltip.shown {
+  visibility: visible;
+  opacity: 1;
+  /* display: block;
+  position: absolute;
+  bottom: 0; */
+}
+
+/* typing */
+
+.typing-text {
+  font-style: italic;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.typing-indicator {
+  display: none;
+  height: 20px;
+  background-color: rgb(46, 46, 46);
+  border-radius: 30px;
+}
+
+.typing-indicator span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 3px;
+  background-color: #888;
+  border-radius: 50%;
+  animation: blink 1.4s infinite both;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0%,
+  80%,
+  100% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
 }

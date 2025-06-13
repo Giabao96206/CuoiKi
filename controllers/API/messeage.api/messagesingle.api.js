@@ -34,41 +34,65 @@ const message = (app, io) => {
     res.render("client/pages/message/message", {});
   });
 
-  const users = {};
+  const users = {}; // users[email] = [socketId1, socketId2, ...]
 
   io.on("connection", (socket) => {
-    console.log("User connected, socket id:", socket.id);
-    socket.emit("registered", {
-      id_main: socket.id,
-    });
+    console.log("🔌 User connected, socket id:", socket.id);
+    socket.emit("registered", { id_main: socket.id });
 
-    // Khi client đăng ký (register) gửi email của chính họ lên server
+    // Khi client đăng ký (gửi email)
     socket.on("register", (data) => {
       const email = data.email;
       if (email) {
-        users[email] = socket.id;
+        if (!users[email]) users[email] = [];
+        users[email].push(socket.id);
+        socket.email = email; // lưu email vào socket để quản lý khi disconnect
+        console.log(`✅ Registered ${email} with socket ${socket.id}`);
+      }
+    });
+
+    // Khi đang gõ
+    socket.on("typing", (data) => {
+      const toSocketList = users[data.email];
+      if (toSocketList) {
+        toSocketList.forEach((id) => {
+          socket.to(id).emit("typing", data);
+        });
+      }
+    });
+
+    // Khi ngừng gõ
+    socket.on("stopTyping", (data) => {
+      const toSocketList = users[data.email];
+      if (toSocketList) {
+        toSocketList.forEach((id) => {
+          socket.to(id).emit("stopTyping", data);
+        });
       }
     });
 
     // Xử lý tin nhắn riêng
     socket.on("private-message", async (data) => {
-      const { from, to, text, images } = data;
-      const toSocketId = users[to];
+      const { from, to, text, images = [], avatar } = data;
+      const toSocketList = users[to];
 
-      // Gửi cho người nhận nếu họ đang online
-      if (toSocketId) {
-        io.to(toSocketId).emit("send_private_message", {
-          from: socket.id,
-          text,
-          images,
+      // Gửi đến người nhận (nếu online)
+      if (toSocketList) {
+        toSocketList.forEach((id) => {
+          io.to(id).emit("send_private_message", {
+            from,
+            text,
+            images,
+            avatar,
+          });
         });
       } else {
-        console.log(`Người nhận ${to} hiện không online.`);
+        console.log(`⚠️ Người nhận ${to} hiện không online.`);
       }
 
-      // Gửi lại tin nhắn cho người gửi để hiển thị
+      // Gửi lại cho chính sender
       io.to(socket.id).emit("send_private_message", {
-        from: socket.id,
+        from,
         text,
         images,
       });
@@ -84,15 +108,27 @@ const message = (app, io) => {
           .input(
             "image_url",
             sql.NVarChar,
-            images.length > 0 ? images.join(",") : null
+            images.length ? images.join(",") : null
           ).query(`
-        INSERT INTO messages (sender_email, receiver_email, content, image_url)
-        VALUES (@sender_email, @receiver_email, @content, @image_url)
-      `);
+          INSERT INTO messages (sender_email, receiver_email, content, image_url)
+          VALUES (@sender_email, @receiver_email, @content, @image_url)
+        `);
         await pool.close();
         console.log("✅ Tin nhắn đã được lưu vào database.");
       } catch (err) {
         console.error("❌ Lỗi khi lưu tin nhắn:", err);
+      }
+    });
+
+    // Khi client disconnect
+    socket.on("disconnect", () => {
+      const email = socket.email;
+      if (email && users[email]) {
+        users[email] = users[email].filter((id) => id !== socket.id);
+        if (users[email].length === 0) {
+          delete users[email];
+        }
+        console.log(`🔌 Disconnected socket ${socket.id} for user ${email}`);
       }
     });
 
@@ -122,7 +158,10 @@ const message = (app, io) => {
         .input("sender_email", sql.NVarChar, from)
         .input("receiver_email", sql.NVarChar, to)
         .query(
-          `SELECT * FROM messages
+          `SELECT messages.*, u1.url_image AS sender_img, u2.url_image AS receiver_img
+          FROM messages
+              JOIN users AS u1 ON messages.sender_email = u1.email
+              JOIN users AS u2 ON messages.receiver_email = u2.email
           WHERE
              (sender_email = @sender_email AND receiver_email = @receiver_email)
           OR

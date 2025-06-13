@@ -5,6 +5,8 @@ let fileIdCounter = 0;
 let mySocketId = null;
 let filesToUpload = [];
 console.log(users);
+let typingTimeout;
+let typingIndicator = document.getElementById("typingIndicator");
 
 let isLoadingFriends = false;
 let usersList = []; // để lưu danh sách bạn bè từ server
@@ -75,20 +77,7 @@ async function loadFriends() {
 
 // Lắng nghe click trên user-link (event delegation)
 document.addEventListener("click", async function (e) {
-  let parent = document.getElementById("chat-list");
-  let a = e.target.closest(".user-chat");
   const target = e.target.closest(".user-link");
-  if (a) {
-    parent.removeChild(a);
-    parent.prepend(a);
-  }
-  if (target) {
-    e.preventDefault();
-    document.querySelectorAll(".user-link.active").forEach((el) => {
-      el.classList.remove("active");
-    });
-  }
-  target.classList.add("active");
   if (target) {
     e.preventDefault();
     const email = target.dataset.email;
@@ -110,6 +99,16 @@ document.addEventListener("click", async function (e) {
     } catch (error) {
       console.error("Lỗi khi xử lý click vào người dùng:", error);
     }
+    const parent = document.getElementById("chat-list");
+    const a = target.closest(".user-chat");
+    if (a) {
+      parent.removeChild(a);
+      parent.prepend(a);
+    }
+    document.querySelectorAll(".user-link.active").forEach((el) => {
+      el.classList.remove("active");
+    });
+    target.classList.add("active");
   }
 });
 
@@ -132,6 +131,7 @@ async function reloadMessages(toEmail, toUsername) {
     if (!response.ok) throw new Error("Lỗi khi tải tin nhắn");
 
     const messages = await response.json();
+    // console.log(messages);
 
     for (let msg of messages) {
       const isMine = msg.sender_email === users.email;
@@ -139,9 +139,14 @@ async function reloadMessages(toEmail, toUsername) {
       // Tin nhắn
       const messageDiv = document.createElement("div");
       messageDiv.classList.add("message", isMine ? "right" : "left");
-      messageDiv.innerHTML = `<span>${isMine ? "Bạn" : toUsername}: ${
-        msg.content
-      }</span>`;
+      if (!isMine) {
+        messageDiv.innerHTML = `
+      <div class="img-profile"><img src="${msg.sender_img}"></div>
+      <span class="${isMine ? "right" : "other"}">${msg.content}</span>`;
+      } else {
+        messageDiv.innerHTML = `
+      <span class="${isMine ? "right" : "other"}">${msg.content}</span>`;
+      }
       chatContent.appendChild(messageDiv);
 
       // Ảnh nếu có
@@ -235,6 +240,7 @@ window.onload = () => {
       }
     }, 100);
   }
+  scrollToBottom();
 };
 
 // Hàm cuộn xuống cuối chat
@@ -252,15 +258,37 @@ socket.on("connect", () => {
 // Nhận tin nhắn
 socket.on("send_private_message", (data) => {
   const chatContent = document.getElementById("chat-content");
-  const isMine = data.from === mySocketId;
+  const isMine = data.from === users.email;
+  console.log(data);
+  console.log(isMine);
 
   const message = document.createElement("div");
   message.classList.add("message", isMine ? "right" : "left");
-  message.innerHTML = `<span>${isMine ? "Bạn" : receivers.username}: ${
-    data.text
-  }</span>`;
+  if (!isMine) {
+    message.innerHTML = ` 
+  <div class="img-profile"><img src="${data.avatar}"></div>
+  <span class="${isMine ? "right" : "other"}">${data.text}</span>`;
+  } else {
+    message.innerHTML = `
+  <span class="${isMine ? "right" : "other"}">${data.text}</span>`;
+  }
+
   chatContent.appendChild(message);
-  console.log(data);
+
+  // const messageDiv = document.createElement("div");
+  // messageDiv.classList.add("message", isMine ? "right" : "left");
+  // if (!isMine) {
+  //   messageDiv.innerHTML = `
+  //     <div class="img-profile"><img src="${msg.sender_img}"></div>
+  //     <span class="${isMine ? "right" : "other"}">${msg.content}</span>`;
+  // } else {
+  //   messageDiv.innerHTML = `
+  //     <span class="${isMine ? "right" : "other"}">${msg.content}</span>
+  //           <div class="img-profile"><img src="${msg.sender_img}"></div>`;
+  // }
+  // chatContent.appendChild(messageDiv);
+
+  // console.log(data);
   // console.log(data.images);
   if (data.images.length > 0) {
     const imgWrapper = document.createElement("div");
@@ -305,6 +333,7 @@ async function sendMessage() {
     to: receivers.email,
     text: msg,
     images: uploadedUrls,
+    avatar: users.avatar,
   });
 
   msgInput.value = "";
@@ -449,37 +478,64 @@ document
     );
   });
 
-const tooltip = document.getElementById("hover-tooltip");
+// const tooltip = document.getElementById("hover-tooltip");
+// // console.log(tooltip);
 
-document.addEventListener("mouseover", (e) => {
-  const userDiv = e.target.closest(".user-chat");
-  if (userDiv) {
-    const email = userDiv.querySelector(".user-link")?.dataset.email;
-    const username = userDiv.querySelector(
-      "#chat-list .user-chat .user-name"
-    )?.textContent;
-    const imgSrc = userDiv.querySelector("img")?.src;
+// document.addEventListener("mouseover", (e) => {
+//   const userDiv = e.target.closest(".user-chat");
+//   if (userDiv) {
+//     const email = userDiv.querySelector(".user-link")?.dataset.email;
+//     const username = userDiv.querySelector(
+//       "#chat-list .user-chat .user-name"
+//     )?.textContent;
+//     const imgSrc = userDiv.querySelector("img")?.src;
 
-    tooltip.innerHTML = `
-      <div style="display: flex; align-items: center;">
-        <img src="${imgSrc}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 8px;" />
-        <div>
-          <strong style=" color: black">${username}</strong><br/>
-          <span style="font-size: 12px; color: black">${email}</span>
-        </div>
-      </div>
-    `;
-    tooltip.style.display = "block";
-  }
+//     tooltip.innerHTML = `
+//       <div style="display: flex; align-items: center;">
+//         <img src="${imgSrc}" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 8px;" />
+//         <div>
+//           <strong style=" color: black">${username}</strong><br/>
+//           <span style="font-size: 12px; color: black">${email}</span>
+//         </div>
+//       </div>
+//     `;
+//     tooltip.style.display = "block";
+//   }
+// });
+
+// document.addEventListener("mousemove", (e) => {
+//   tooltip.style.top = `${e.pageY + 10}px`;
+//   tooltip.style.left = `${e.pageX + 10}px`;
+// });
+
+// document.addEventListener("mouseout", (e) => {
+//   if (e.target.closest(".user-chat")) {
+//     tooltip.style.display = "none";
+//   }
+// });
+
+document
+  .querySelector("emoji-picker")
+  .addEventListener("emoji-click", (event) => {
+    const msgInput = document.getElementById("msgInput");
+    msgInput.value += event.detail.unicode;
+  });
+
+// Typing indicator
+document.getElementById("msgInput").addEventListener("input", () => {
+  socket.emit("typing", { email: receivers.email });
+  clearTimeout(typingTimeout);
+  typingTimeout = setTimeout(() => {
+    socket.emit("stopTyping", { email: receivers.email });
+  }, 3000);
 });
 
-document.addEventListener("mousemove", (e) => {
-  tooltip.style.top = `${e.pageY + 10}px`;
-  tooltip.style.left = `${e.pageX + 10}px`;
+socket.on("typing", (data) => {
+  typingIndicator.style.display = "inline-block";
 });
 
-document.addEventListener("mouseout", (e) => {
-  if (e.target.closest(".user-chat")) {
-    tooltip.style.display = "none";
-  }
+socket.on("stopTyping", () => {
+  typingIndicator.style.display = "none";
 });
+
+scrollToBottom();
